@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        
+    </head>
+    <body>
+        <p id="demo"></p>
+    <script>
+         str = "Wrap text using a more sophisticated algorithm such as the Knuth and Plass TeX algorithm. If your language provides this, you get easy extra credit, but you must reference documentation indicating that the algorithm is something better than a simple minimum length algorithm."
+            
+
+        function wordWrap(str, maxWidth) {
+            var newLineStr = "\n"; done = false; res = '';
+            while (str.length > maxWidth) {                 
+                found = false;
+                // Inserts new line at first whitespace of the line
+                for (i = maxWidth - 1; i >= 0; i--) {
+                    if (testWhite(str.charAt(i))) {
+                        res = res + [str.slice(0, i), newLineStr].join('');
+                        str = str.slice(i + 1);
+                        found = true;
+                    }
+                }
+                // Inserts new line at maxWidth position, the word is too long to wrap
+                if (!found) {
+                    res += [str.slice(0, maxWidth), newLineStr].join('');
+                    str = str.slice(maxWidth);
+                }
+
+            }
+
+            return res + str;
+        }
+
+        function testWhite(x) {
+            var white = new RegExp(/^\s$/);
+            return white.test(x.charAt(0));
+        };
+        // Please add the number of character on wordWrap(str,number)
+        document.getElementById("demo").innerHTML = wordWrap(str, 40);
+</script>
+    </body>
+</html>
